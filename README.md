@@ -4,8 +4,29 @@
 
 ## Hướng dẫn cài đặt và chạy (Quan trọng)
 
-1.  **Tải Code:**
-    * Clone hoặc tải ZIP project này về máy.
+## 1. Cách Tải Code (Rất Quan Trọng!)
+
+Bạn có 2 cách để tải, nhưng **Cách 1 (Git Clone) là cách tốt nhất** để không bị lỗi bảo mật "Mark of the Web".
+
+### Cách 1: Dùng Git Clone (Khuyên Dùng)
+
+1.  Trên trang GitHub, bấm vào nút màu xanh lá **`<> Code`**.
+2.  Copy đường link **HTTPS** (ví dụ: `https://github.com/TenBan/DuAnBanVePhim.git`).
+3.  Mở **Visual Studio** lên (mở app thôi, không cần mở project).
+4.  Ở cửa sổ khởi động, chọn **"Clone a repository"** (Nhân bản một kho chứa).
+5.  Dán cái link HTTPS đó vào -> Bấm **Clone**.
+
+👉 Visual Studio sẽ tự tải code về, và bạn có thể chạy được luôn mà **không cần làm "Unblock"** gì cả!
+
+---
+
+### Cách 2: Tải file ZIP (Nếu dùng cách này, BẮT BUỘC phải làm thêm)
+
+1.  Bấm `Code` -> **Download ZIP**.
+2.  **TRƯỚC KHI GIẢI NÉN:** Chuột phải vào file `.zip` vừa tải về.
+3.  Chọn **Properties**.
+4.  Ở tab General, tích vào ô **"Unblock"** -> Bấm **OK**.
+5.  Bây giờ mới giải nén file `.zip`.
 
 2.  **Cài đặt Database:**
     * Mở SQL Server Management Studio (SSMS).
