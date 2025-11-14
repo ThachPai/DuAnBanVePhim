@@ -1,0 +1,15 @@
+# Các file rác của Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+_ReSharper.*/
+[Bb]in/
+[Dd]ebug/
+[Rr]elease/
+[Oo]bj/
+
+# Các file tạm và bí mật
+appsettings.Development.json
+*.tmp
+*.log
