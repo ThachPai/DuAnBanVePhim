@@ -9,7 +9,7 @@
 
 2.  **Cài đặt Database:**
     * Mở SQL Server Management Studio (SSMS).
-    * Mở file `database_setup.sql` (đã có sẵn trong thư mục này).
+    * Mở file `script.sql` (đã có sẵn trong thư mục này).
     * Bấm **Execute** để tạo Database và dữ liệu mẫu (phim, tài khoản admin).
 
 3.  **Cấu hình API (Project Phim3API):**
