@@ -1,0 +1,6 @@
+@Phim3API_HostAddress = http://localhost:5221
+
+GET {{Phim3API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
