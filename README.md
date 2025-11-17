@@ -37,6 +37,7 @@ Bạn có 2 cách để tải, nhưng **Cách 1 (Git Clone) là cách tốt nh�
     * Mở file `Phim3API/appsettings.json`.
     * Sửa lại dòng `ConnectionStrings` cho đúng với tên Server/Database SQL của máy bạn.
 
+**Phần Tiếp theo sau khi đã cài đặt thành công**
 4.  **Chạy ứng dụng (Bắt buộc):**
     * Mở file `.sln` bằng Visual Studio.
     * Chuột phải vào **Solution** (dòng trên cùng) -> **Configure Startup Projects...**
