@@ -46,7 +46,7 @@ namespace Phim3
         private void button1_Click(object sender, EventArgs e)
         {
 
-            GiaoDienNguoiDung fgiaoDienNguoiDung = new GiaoDienNguoiDung("Admin", "Admin");
+            GiaoDienNguoiDung fgiaoDienNguoiDung = new GiaoDienNguoiDung();
             fgiaoDienNguoiDung.Show();
             this.Close();
         }

@@ -1,83 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Http;
-using Newtonsoft.Json;
+// (Không cần using HttpClient hay Json, vì ApiClient đã lo)
 
+// (Đảm bảo namespace của bạn là 'Phim3' hoặc 'quanlyve2')
 namespace Phim3
 {
-    public partial class Form2 : Form
+    public partial class Form2 : Form // (Form2 là form Đăng ký)
     {
         public Form2()
         {
             InitializeComponent();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        // === HÀM ĐĂNG KÝ (ĐÃ NÂNG CẤP) ===
+        private async void button1_Click(object sender, EventArgs e) // (Giả sử button1 là nút Đăng ký)
         {
-            // 1. Lấy dữ liệu từ các ô nhập
-            string username = txtUsername.Text; // Đổi tên txtUsername theo giao diện của bạn
-            string password = txtPassword.Text; // Đổi tên txtPassword theo giao diện của bạn
-            string email = txtEmail.Text;       // Đổi tên txtEmail theo giao diện của bạn
+            // 1. Kiểm tra mật khẩu (Nếu bạn có ô "Confirm Password")
+            // if (txtPassword.Text != txtConfirmPassword.Text)
+            // {
+            //     MessageBox.Show("Mật khẩu xác nhận không khớp!");
+            //     return; 
+            // }
 
-            // Kiểm tra rỗng
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            // 2. Kiểm tra rỗng (Giữ nguyên code cũ của bạn)
+            if (string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(txtPassword.Text) || string.IsNullOrEmpty(txtEmail.Text))
             {
                 MessageBox.Show("Vui lòng nhập đủ thông tin!");
                 return;
             }
 
-            // 2. Đóng gói dữ liệu thành kiện hàng (Object nặc danh)
-            // Lưu ý: Tên Username, Password, Email phải giống hệt bên API của Phúc
-            var registerData = new
+            // 3. Chuẩn bị "gói hàng" (dùng class từ AuthModels.cs)
+            var requestData = new RegisterRequest
             {
-                Username = username,
-                Password = password,
-                Email = email
+                FullName = "Default User", // (Code cũ của bạn không có ô FullName)
+                Email = txtEmail.Text,
+                Username = txtUsername.Text,
+                Password = txtPassword.Text
             };
 
-            // Biến thành chuỗi JSON
-            string jsonContent = JsonConvert.SerializeObject(registerData);
-
-            // Đóng gói để gửi đi (Encoding UTF8 để không lỗi tiếng Việt)
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-            // 3. Gửi đi (Gọi điện cho Phúc)
             try
             {
-                using (HttpClient client = new HttpClient())
+                // 4. Gọi API (dùng "dây điện" từ ApiClient.cs)
+                var response = await ApiClient.PostAsync("register", requestData);
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
                 {
-                    // ⚠️ QUAN TRỌNG: Thay số 7123 bằng cổng API trên máy bạn
-                    string apiUrl = "https://localhost:7071/api/auth/register";
-
-                    // Gửi lệnh POST
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-
-                    // 4. Nhận phản hồi
-                    if (response.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("Đăng ký thành công! Giờ bạn có thể đăng nhập.");
-                        this.Close(); // Đóng form đăng ký
-                    }
-                    else
-                    {
-                        // Đọc lỗi từ API gửi về (ví dụ: "Tài khoản đã tồn tại")
-                        string errorResponse = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show("Đăng ký thất bại: " + errorResponse);
-                    }
+                    MessageBox.Show("Đăng ký tài khoản thành công! Vui lòng quay lại đăng nhập.");
+                    this.Close(); // Đóng form để quay lại Đăng nhập
+                }
+                else
+                {
+                    // Hiển thị lỗi trả về từ API (ví dụ: "Email đã tồn tại")
+                    MessageBox.Show(responseString, "Lỗi Đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+                // Lỗi này xảy ra khi API backend của bạn bị tắt
+                MessageBox.Show($"Lỗi kết nối đến server: {ex.Message}", "Lỗi Mạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
-    
 }

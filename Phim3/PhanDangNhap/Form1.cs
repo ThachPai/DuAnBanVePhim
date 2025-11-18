@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Net.Http;
+using System.Net.Http; // (Cần cho HttpClient)
 using System.Text;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 using Phim3.MainChinh;
+using System.Text.Json; // <-- Dùng thư viện JSON mới
+// (Không cần Newtonsoft.Json nữa)
+
 namespace Phim3
 {
     public partial class Form1 : Form
@@ -13,18 +15,7 @@ namespace Phim3
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Form2 form = new Form2();
-            form.ShowDialog();
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Form3 form3 = new Form3();
-            form3.ShowDialog();
-        }
-
+        // === HÀM ĐĂNG NHẬP (ĐÃ NÂNG CẤP HOÀN CHỈNH) ===
         private async void btnDangNhap_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text;
@@ -36,49 +27,62 @@ namespace Phim3
                 return;
             }
 
-            // 1. Đóng gói dữ liệu
-            var loginData = new { Username = username, Password = password };
-            string jsonContent = JsonConvert.SerializeObject(loginData);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            // 1. Đóng gói dữ liệu (Dùng class từ AuthModels.cs)
+            var requestData = new LoginRequest
+            {
+                EmailOrUsername = username,
+                Password = password
+            };
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                // 2. Gọi API (Dùng file helper ApiClient.cs)
+                HttpResponseMessage response = await ApiClient.PostAsync("login", requestData);
+                string responseString = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
                 {
-                    // ⚠️ Đổi số PORT 
-                    string apiUrl = "https://localhost:7071/api/auth/login";
+                    MessageBox.Show("Đăng nhập thành công!");
 
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-
-                    if (response.IsSuccessStatusCode)
+                    // 3. "Mở" gói hàng (JSON) nhận về
+                    var loginResponse = JsonSerializer.Deserialize<LoginResponse>(responseString, new JsonSerializerOptions
                     {
-                        // Đọc kết quả trả về (Để xem là Admin hay User thường)
-                        string responseString = await response.Content.ReadAsStringAsync();
-                        dynamic result = JsonConvert.DeserializeObject(responseString);
+                        PropertyNameCaseInsensitive = true
+                    });
 
-                        string role = result.user.role; // Lấy quyền (Admin/User)
-                        string userTen = result.user.username;
-                        
-                        MessageBox.Show($"Xin chào {userTen}! Đăng nhập thành công.");
+                    // 4. Cất "vé thông hành" (Token) vào "ví" toàn cục
+                    GlobalToken.Token = loginResponse?.token;
 
-                        // --- CHUYỂN MÀN HÌNH ---
-                        // Mở Form Trang Chủ
-                        GiaoDienNguoiDung trangChu = new GiaoDienNguoiDung(userTen,role);
-                        trangChu.Show();
+                    // 5. Mở Form Trang Chủ (KHÔNG TRUYỀN GÌ CẢ)
+                    GiaoDienNguoiDung trangChu = new GiaoDienNguoiDung();
+                    trangChu.Show();
 
-                        // Ẩn Form Đăng Nhập đi
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đăng nhập thất bại! Kiểm tra lại tài khoản/mật khẩu.");
-                    }
+                    this.Hide();
+                }
+                else
+                {
+                    // Hiển thị lỗi từ API (ví dụ: "Sai tài khoản hoặc mật khẩu!")
+                    MessageBox.Show(responseString, "Lỗi Đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+                // Lỗi này xảy ra nếu API Backend bị tắt
+                MessageBox.Show("Lỗi kết nối: " + ex.Message, "Lỗi Mạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // === CÁC HÀM CŨ GIỮ NGUYÊN ===
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form2 form = new Form2();
+            form.ShowDialog();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.ShowDialog();
         }
     }
 }
