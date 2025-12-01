@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Phim3API.Data;
 using Phim3API.Models;
+using Phim3API.Services;
 using System;
 using System.Linq;
 
@@ -12,11 +13,13 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context; // Biến để kết nối DB
+        private readonly EmailService _emailService; // Thêm cái này 11/17/2025
 
         // Constructor: Nhận kết nối DB vào đây
-        public AuthController(AppDbContext context)
+        public AuthController(AppDbContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         // --- 1. ĐĂNG KÝ (THẬT) ---
@@ -141,6 +144,30 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
 
             return Ok(new { message = "Đã xóa tài khoản thành công!" });
         }
-        
+        // --- 7. ADMIN THÊM TÀI KHOẢN MỚI ---
+        [HttpPost("create-user")]
+        public IActionResult CreateUser([FromBody] CreateUserRequest request)
+        {
+            // 1. Kiểm tra trùng tên
+            if (_context.Users.Any(u => u.Username == request.Username))
+            {
+                return BadRequest(new { message = "Tên đăng nhập đã tồn tại!" });
+            }
+
+            // 2. Tạo user mới
+            var newUser = new User
+            {
+                Username = request.Username,
+                Password = request.Password, // Lưu ý: Thực tế nên mã hóa
+                Email = request.Email,
+                Role = request.Role // Lưu quyền (Admin/User)
+            };
+
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+
+            return Ok(new { message = "Thêm tài khoản thành công!" });
+        }
+
     }
 }

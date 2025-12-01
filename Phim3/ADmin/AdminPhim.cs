@@ -19,6 +19,7 @@ namespace Phim3
         public AdminPhim()
         {
             InitializeComponent();
+            cbRole.SelectedIndex = 0; // Mặc định chọn cái đầu tiên (Admin/User) 12/1//2025 : Cập nhật thêm tài khoản
         }
         private async System.Threading.Tasks.Task LoadUsers()
         {
@@ -206,6 +207,86 @@ namespace Phim3
             else
             {
                 MessageBox.Show("Vui lòng chọn một dòng để xóa!");
+            }
+        }
+        // 12/1/2025 : Cập nhật thêm tài khoản
+
+        private async void btnLuu_Click(object sender, EventArgs e)
+        {
+            // 1. Kiểm tra nhập thiếu
+            if (string.IsNullOrEmpty(txtUser.Text) || string.IsNullOrEmpty(txtPass.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên và mật khẩu!");
+                return;
+            }
+
+            // 2. Lấy dữ liệu từ giao diện
+            var newUser = new
+            {
+                Username = txtUser.Text,
+                Password = txtPass.Text,
+                Email = txtEmail.Text,
+                Role = cbRole.Text // Lấy quyền Admin/User
+            };
+
+            // Kiểm tra nếu chưa chọn quyền thì mặc định là User
+            if (string.IsNullOrEmpty(newUser.Role)) newUser = new { newUser.Username, newUser.Password, newUser.Email, Role = "User" };
+
+            // 3. Gọi API thêm mới
+            try
+            {
+                using (HttpClient client = new HttpClient()) // Hoặc dùng ApiClient.GetClient() nếu đã làm bài trước
+                {
+                    string json = JsonConvert.SerializeObject(newUser);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    // SỬA PORT CỦA BẠN VÀO ĐÂY
+                    string apiUrl = "https://localhost:7071/api/auth/create-user";
+
+                    var response = await client.PostAsync(apiUrl, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Thêm tài khoản thành công!");
+
+                        // --- ĐOẠN NÀY KHÁC FORM CŨ ---
+
+                        // A. Xóa trắng các ô nhập để nhập người tiếp theo
+                        txtUser.Text = "";
+                        txtPass.Text = "";
+                        txtEmail.Text = "";
+                        cbRole.SelectedIndex = -1; // Bỏ chọn
+
+                        // B. Tải lại bảng danh sách bên trên để thấy ngay người vừa thêm
+                        await LoadUsers();
+
+                        // C. Cập nhật luôn thống kê khách hàng
+                        await LoadDashboard();
+                    }
+                    else
+                    {
+                        string error = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show("Lỗi: " + error);
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show("Lỗi kết nối: " + ex.Message); }
+        }
+
+        private void btnDangXuatAdmin_Click(object sender, EventArgs e)
+        {
+            // 1. Hỏi xác nhận cho chắc ăn
+            DialogResult result = MessageBox.Show("Admin có chắc muốn đăng xuất không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // 2. Mở lại Form Đăng nhập
+                // (Lưu ý: Nếu Form đăng nhập của bạn tên khác thì sửa lại chỗ này nhé)
+                Form1 loginForm = new Form1();
+                loginForm.Show();
+
+                // 3. Đóng Form Admin hiện tại
+                this.Close();
             }
         }
     }

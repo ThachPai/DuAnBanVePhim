@@ -52,7 +52,7 @@ namespace Phim3
                         dynamic result = JsonConvert.DeserializeObject(responseString);
 
                         // Hiển thị OTP lên màn hình cho người dùng copy (Chỉ dùng khi test thôi nhé)
-                        MessageBox.Show(result.message.ToString(), "Thông báo OTP (Test)");
+                        MessageBox.Show(result.message.ToString(), "Thông báo OTP");
                     }
                     else
                     {

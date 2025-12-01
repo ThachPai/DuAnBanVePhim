@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 // Đăng ký kết nối SQL
 builder.Services.AddDbContext<Phim3API.Data.AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<Phim3API.Services.EmailService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
