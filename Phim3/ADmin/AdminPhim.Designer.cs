@@ -65,16 +65,6 @@
             pictureBox10 = new PictureBox();
             pictureBox6 = new PictureBox();
             tabPage5 = new TabPage();
-            btnThemUser = new Button();
-            panel10 = new Panel();
-            btnLuu = new Button();
-            cbRole = new ComboBox();
-            label9 = new Label();
-            label8 = new Label();
-            txtEmail = new TextBox();
-            txtPass = new TextBox();
-            txtUser = new TextBox();
-            label7 = new Label();
             btnXoaUser = new Button();
             dgvTaiKhoan = new DataGridView();
             panel1 = new Panel();
@@ -82,6 +72,16 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            btnThemUser = new Button();
+            label7 = new Label();
+            txtUser = new TextBox();
+            txtPass = new TextBox();
+            txtEmail = new TextBox();
+            label8 = new Label();
+            label9 = new Label();
+            cbRole = new ComboBox();
+            btnLuu = new Button();
+            panel10 = new Panel();
             btnDangXuatAdmin = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -107,10 +107,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             tabPage5.SuspendLayout();
-            panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTaiKhoan).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel10.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -486,101 +486,6 @@
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Tài khoản";
             // 
-            // btnThemUser
-            // 
-            btnThemUser.Location = new Point(0, 350);
-            btnThemUser.Name = "btnThemUser";
-            btnThemUser.Size = new Size(193, 34);
-            btnThemUser.TabIndex = 3;
-            btnThemUser.Text = "Thêm tài khoản";
-            btnThemUser.UseVisualStyleBackColor = true;
-            // 
-            // panel10
-            // 
-            panel10.BackColor = Color.White;
-            panel10.Controls.Add(btnLuu);
-            panel10.Controls.Add(cbRole);
-            panel10.Controls.Add(label9);
-            panel10.Controls.Add(label8);
-            panel10.Controls.Add(txtEmail);
-            panel10.Controls.Add(txtPass);
-            panel10.Controls.Add(txtUser);
-            panel10.Controls.Add(label7);
-            panel10.Location = new Point(-4, 390);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(944, 262);
-            panel10.TabIndex = 2;
-            // 
-            // btnLuu
-            // 
-            btnLuu.Location = new Point(607, 142);
-            btnLuu.Name = "btnLuu";
-            btnLuu.Size = new Size(182, 34);
-            btnLuu.TabIndex = 7;
-            btnLuu.Text = "Lưu";
-            btnLuu.UseVisualStyleBackColor = true;
-            btnLuu.Click += btnLuu_Click;
-            // 
-            // cbRole
-            // 
-            cbRole.FormattingEnabled = true;
-            cbRole.Items.AddRange(new object[] { "Admin", "User" });
-            cbRole.Location = new Point(607, 34);
-            cbRole.Name = "cbRole";
-            cbRole.Size = new Size(182, 38);
-            cbRole.TabIndex = 6;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(11, 146);
-            label9.Name = "label9";
-            label9.Size = new Size(66, 30);
-            label9.TabIndex = 5;
-            label9.Text = "Email";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(11, 94);
-            label8.Name = "label8";
-            label8.Size = new Size(107, 30);
-            label8.TabIndex = 4;
-            label8.Text = "Mật khẩu";
-            // 
-            // txtEmail
-            // 
-            txtEmail.Location = new Point(177, 130);
-            txtEmail.Multiline = true;
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(246, 46);
-            txtEmail.TabIndex = 3;
-            // 
-            // txtPass
-            // 
-            txtPass.Location = new Point(177, 78);
-            txtPass.Multiline = true;
-            txtPass.Name = "txtPass";
-            txtPass.Size = new Size(246, 46);
-            txtPass.TabIndex = 2;
-            // 
-            // txtUser
-            // 
-            txtUser.Location = new Point(177, 26);
-            txtUser.Multiline = true;
-            txtUser.Name = "txtUser";
-            txtUser.Size = new Size(246, 46);
-            txtUser.TabIndex = 1;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(11, 42);
-            label7.Name = "label7";
-            label7.Size = new Size(160, 30);
-            label7.TabIndex = 0;
-            label7.Text = "Tên đăng nhập";
-            // 
             // btnXoaUser
             // 
             btnXoaUser.Location = new Point(0, 16);
@@ -664,6 +569,101 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // btnThemUser
+            // 
+            btnThemUser.Location = new Point(0, 350);
+            btnThemUser.Name = "btnThemUser";
+            btnThemUser.Size = new Size(193, 34);
+            btnThemUser.TabIndex = 3;
+            btnThemUser.Text = "Thêm tài khoản";
+            btnThemUser.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(11, 42);
+            label7.Name = "label7";
+            label7.Size = new Size(160, 30);
+            label7.TabIndex = 0;
+            label7.Text = "Tên đăng nhập";
+            // 
+            // txtUser
+            // 
+            txtUser.Location = new Point(177, 26);
+            txtUser.Multiline = true;
+            txtUser.Name = "txtUser";
+            txtUser.Size = new Size(246, 46);
+            txtUser.TabIndex = 1;
+            // 
+            // txtPass
+            // 
+            txtPass.Location = new Point(177, 78);
+            txtPass.Multiline = true;
+            txtPass.Name = "txtPass";
+            txtPass.Size = new Size(246, 46);
+            txtPass.TabIndex = 2;
+            // 
+            // txtEmail
+            // 
+            txtEmail.Location = new Point(177, 130);
+            txtEmail.Multiline = true;
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(246, 46);
+            txtEmail.TabIndex = 3;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(11, 94);
+            label8.Name = "label8";
+            label8.Size = new Size(107, 30);
+            label8.TabIndex = 4;
+            label8.Text = "Mật khẩu";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(11, 146);
+            label9.Name = "label9";
+            label9.Size = new Size(66, 30);
+            label9.TabIndex = 5;
+            label9.Text = "Email";
+            // 
+            // cbRole
+            // 
+            cbRole.FormattingEnabled = true;
+            cbRole.Items.AddRange(new object[] { "Admin", "User" });
+            cbRole.Location = new Point(607, 34);
+            cbRole.Name = "cbRole";
+            cbRole.Size = new Size(182, 38);
+            cbRole.TabIndex = 6;
+            // 
+            // btnLuu
+            // 
+            btnLuu.Location = new Point(607, 142);
+            btnLuu.Name = "btnLuu";
+            btnLuu.Size = new Size(182, 34);
+            btnLuu.TabIndex = 7;
+            btnLuu.Text = "Lưu";
+            btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.Click += btnLuu_Click;
+            // 
+            // panel10
+            // 
+            panel10.BackColor = Color.White;
+            panel10.Controls.Add(btnLuu);
+            panel10.Controls.Add(cbRole);
+            panel10.Controls.Add(label9);
+            panel10.Controls.Add(label8);
+            panel10.Controls.Add(txtEmail);
+            panel10.Controls.Add(txtPass);
+            panel10.Controls.Add(txtUser);
+            panel10.Controls.Add(label7);
+            panel10.Location = new Point(-4, 390);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(944, 262);
+            panel10.TabIndex = 2;
+            // 
             // btnDangXuatAdmin
             // 
             btnDangXuatAdmin.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -712,12 +712,12 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             tabPage5.ResumeLayout(false);
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTaiKhoan).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel10.ResumeLayout(false);
+            panel10.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -766,16 +766,16 @@
         private PictureBox pictureBox11;
         private Button btnXoaUser;
         private DataGridView dgvTaiKhoan;
+        private Button btnThemUser;
         private Panel panel10;
+        private Button btnLuu;
+        private ComboBox cbRole;
         private Label label9;
         private Label label8;
         private TextBox txtEmail;
         private TextBox txtPass;
         private TextBox txtUser;
         private Label label7;
-        private Button btnLuu;
-        private ComboBox cbRole;
-        private Button btnThemUser;
         private Button btnDangXuatAdmin;
     }
 }
