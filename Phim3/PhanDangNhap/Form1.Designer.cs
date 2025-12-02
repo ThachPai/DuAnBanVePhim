@@ -101,9 +101,10 @@
             txtPassword.Location = new Point(44, 329);
             txtPassword.Multiline = true;
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(483, 42);
             txtPassword.TabIndex = 6;
-            txtPassword.UseSystemPasswordChar = true;
+            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // label4
             // 
@@ -137,6 +138,7 @@
             // 
             // txtUsername
             // 
+            txtUsername.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtUsername.Location = new Point(44, 229);
             txtUsername.Multiline = true;
             txtUsername.Name = "txtUsername";

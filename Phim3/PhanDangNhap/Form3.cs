@@ -39,8 +39,8 @@ namespace Phim3
 
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                HttpClient client = new HttpClient();
+                
                     // Gọi API gửi OTP
                     string apiUrl = "https://localhost:7071/api/auth/forgot-password"; // Nhớ sửa PORT
                     var response = await client.PostAsync(apiUrl, content);
@@ -58,7 +58,7 @@ namespace Phim3
                     {
                         MessageBox.Show("Email không tồn tại trong hệ thống!");
                     }
-                }
+                
             }
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
@@ -82,8 +82,8 @@ namespace Phim3
 
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                HttpClient client = new HttpClient();
+                
                     // Gọi API xác nhận đổi pass
                     string apiUrl = "https://localhost:7071/api/auth/reset-password"; // Nhớ sửa PORT
                     var response = await client.PostAsync(apiUrl, content);
@@ -98,7 +98,7 @@ namespace Phim3
                         string error = await response.Content.ReadAsStringAsync();
                         MessageBox.Show("Thất bại: " + error);
                     }
-                }
+                
             }
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }

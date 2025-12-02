@@ -9,6 +9,8 @@ namespace Phim3API.Data
         // Đây chính là bảng Users trong SQL
         public DbSet<User> Users { get; set; }
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Booking> Bookings { get; set; }
+        
+        public DbSet<Showtime> Showtimes { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

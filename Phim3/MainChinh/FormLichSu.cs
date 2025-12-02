@@ -30,37 +30,44 @@ namespace Phim3.MainChinh
         {
             try
             {
-                // 👇 THÊM ĐOẠN KIỂM TRA NÀY
-                if (string.IsNullOrEmpty(_username))
-                {
-                    MessageBox.Show("Lỗi to: Tên người dùng bị rỗng rồi!");
-                    return;
-                }
-                // 👇 THÊM DÒNG NÀY ĐỂ KIỂM TRA XEM NÓ ĐANG TÌM CỦA AI
-                MessageBox.Show("Đang tìm vé của user: [" + _username + "]");
-                using (HttpClient client = new HttpClient())
-                {
-                    // Gọi API lấy lịch sử
-                    string apiUrl = "https://localhost:7071/api/booking/history?username=" + _username;
+                // 1. Kiểm tra xem có username chưa
+                if (string.IsNullOrEmpty(_username)) return;
 
-                    var response = await client.GetStringAsync(apiUrl);
+                // 2. Gọi API Ticket mới
+                // Lưu ý: Đường dẫn là /api/ticket/history
+                using (HttpClient client = ApiClient.GetClient()) // Dùng ApiClient cho chuẩn
+                {
+                    string url = ApiClient.BaseUrl + "/api/ticket/history?username=" + Uri.EscapeDataString(_username);
 
-                    // Bạn cần tạo class BookingDTO ở client tương ứng để hứng dữ liệu nhé
-                    // Hoặc dùng tạm dynamic nếu lười tạo class
+                    var response = await client.GetStringAsync(url);
+
+                    // 3. Đổ dữ liệu vào List BookingDTO mới
                     var listVe = JsonConvert.DeserializeObject<List<BookingDTO>>(response);
 
+                    // 4. Hiển thị lên bảng
                     dgvLichSu.DataSource = listVe;
+
+                    // (Optional) Đặt tên cột tiếng Việt cho đẹp
+                    if (dgvLichSu.Columns["MovieTitle"] != null) dgvLichSu.Columns["MovieTitle"].HeaderText = "Tên Phim";
+                    if (dgvLichSu.Columns["SeatNumber"] != null) dgvLichSu.Columns["SeatNumber"].HeaderText = "Ghế";
+                    if (dgvLichSu.Columns["Price"] != null) dgvLichSu.Columns["Price"].HeaderText = "Giá Tiền";
+                    // ... Bạn tự đổi tên tiếp nhé
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi tải lịch sử: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải lịch sử: " + ex.Message);
+            }
         }
     }
     public class BookingDTO
     {
-        // Tên các cột này phải GIỐNG Y HỆT tên trong API (BookingController) trả về
-        public string MovieTitle { get; set; }  // Tên phim
-        public int Quantity { get; set; }       // Số lượng
-        public decimal TotalPrice { get; set; } // Tổng tiền
-        public DateTime BookingDate { get; set; } // Ngày đặt
+        public int Id { get; set; }
+        public string MovieTitle { get; set; } // Tên phim
+        public string RoomName { get; set; }   // Tên rạp (Ví dụ: Rạp 1)
+        public DateTime Time { get; set; }     // Giờ chiếu
+        public string SeatNumber { get; set; } // Ghế (Ví dụ: A1)
+        public decimal Price { get; set; }     // Giá vé
+        public DateTime Date { get; set; }     // Ngày mua vé
     }
 }

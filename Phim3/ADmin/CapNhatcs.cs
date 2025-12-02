@@ -53,8 +53,8 @@ namespace Phim3.PhanDangNhap
             // 3. Gọi API (Phương thức PUT)
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                HttpClient client = new HttpClient();
+                
                     string json = JsonConvert.SerializeObject(updateData);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -72,7 +72,7 @@ namespace Phim3.PhanDangNhap
                     {
                         MessageBox.Show("Lỗi cập nhật: " + response.StatusCode);
                     }
-                }
+                
             }
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }

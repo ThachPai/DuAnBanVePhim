@@ -22,7 +22,7 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
             _emailService = emailService;
         }
 
-        // --- 1. ĐĂNG KÝ (THẬT) ---
+        // --- 1. ĐĂNG KÝ  ---
         [HttpPost("register")]
         public IActionResult Register([FromBody] Models.RegisterRequest request)
         {
@@ -39,7 +39,7 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
             var newUser = new User
             {
                 Username = request.Username,
-                Password = request.Password, // Lưu ý: Thực tế phải mã hóa pass (MD5/BCrypt), ở đây làm demo thì lưu trần
+                Password = Phim3API.Helpers.PasswordHasher.ComputeHash(request.Password),
                 Email = request.Email,
                 Role = "User"
             };
@@ -51,12 +51,13 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
             return Ok(new { message = "Đăng ký thành công!" });
         }
 
-        // --- 2. ĐĂNG NHẬP (THẬT) ---
+        // --- 2. ĐĂNG NHẬP  ---
         [HttpPost("login")]
         public IActionResult Login([FromBody] Models.LoginRequest request)
         {
-            // Tìm user trong DB khớp cả tên và pass
-            var user = _context.Users.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
+            string matKhauDaMaHoa = Phim3API.Helpers.PasswordHasher.ComputeHash(request.Password);
+
+            var user = _context.Users.FirstOrDefault(u => u.Username == request.Username && u.Password == matKhauDaMaHoa);
 
             if (user == null)
             {
@@ -71,7 +72,7 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
             });
         }
 
-        // --- 3. QUÊN MẬT KHẨU (THẬT) ---
+        // --- 3. QUÊN MẬT KHẨU ---
         [HttpPost("forgot-password")]
         public IActionResult ForgotPassword([FromBody] Microsoft.AspNetCore.Identity.Data.ForgotPasswordRequest request)
         {
@@ -103,7 +104,7 @@ namespace Phim3API.Controllers // Nhớ đổi tên namespace theo tên project 
             }
 
             // 3. Nếu đúng OTP -> Cập nhật mật khẩu mới
-            user.Password = request.NewPassword;
+            user.Password = Phim3API.Helpers.PasswordHasher.ComputeHash(request.NewPassword);
 
             // Quan trọng: Xóa mã OTP đi để không dùng lại được nữa
             user.OTPCode = null;

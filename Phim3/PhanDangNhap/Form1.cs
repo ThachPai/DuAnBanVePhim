@@ -43,42 +43,47 @@ namespace Phim3
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                HttpClient client = new HttpClient();
+
+                // ⚠️ Đổi số PORT 
+                string apiUrl = "https://localhost:7071/api/auth/login";
+
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    // ⚠️ Đổi số PORT 
-                    string apiUrl = "https://localhost:7071/api/auth/login";
+                    // Đọc kết quả trả về (Để xem là Admin hay User thường)
+                    string responseString = await response.Content.ReadAsStringAsync();
+                    dynamic result = JsonConvert.DeserializeObject(responseString);
 
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+                    string role = result.user.role; // Lấy quyền (Admin/User)
+                    string userTen = result.user.username;
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Đọc kết quả trả về (Để xem là Admin hay User thường)
-                        string responseString = await response.Content.ReadAsStringAsync();
-                        dynamic result = JsonConvert.DeserializeObject(responseString);
+                    MessageBox.Show($"Xin chào {userTen}! Đăng nhập thành công.");
 
-                        string role = result.user.role; // Lấy quyền (Admin/User)
-                        string userTen = result.user.username;
-                        
-                        MessageBox.Show($"Xin chào {userTen}! Đăng nhập thành công.");
+                    // --- CHUYỂN MÀN HÌNH ---
+                    // Mở Form Trang Chủ
+                    GiaoDienNguoiDung trangChu = new GiaoDienNguoiDung(userTen, role);
+                    trangChu.Show();
 
-                        // --- CHUYỂN MÀN HÌNH ---
-                        // Mở Form Trang Chủ
-                        GiaoDienNguoiDung trangChu = new GiaoDienNguoiDung(userTen,role);
-                        trangChu.Show();
-
-                        // Ẩn Form Đăng Nhập đi
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đăng nhập thất bại! Kiểm tra lại tài khoản/mật khẩu.");
-                    }
+                    // Ẩn Form Đăng Nhập đi
+                    this.Hide();
                 }
+                else
+                {
+                    MessageBox.Show("Đăng nhập thất bại! Kiểm tra lại tài khoản/mật khẩu.");
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
             }
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

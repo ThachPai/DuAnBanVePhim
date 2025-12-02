@@ -51,8 +51,8 @@ namespace Phim3
             // 3. Gửi đi (Gọi điện cho Phúc)
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                HttpClient client = new HttpClient();
+                
                     // ⚠️ QUAN TRỌNG: Thay số 7123 bằng cổng API trên máy bạn
                     string apiUrl = "https://localhost:7071/api/auth/register";
 
@@ -71,7 +71,7 @@ namespace Phim3
                         string errorResponse = await response.Content.ReadAsStringAsync();
                         MessageBox.Show("Đăng ký thất bại: " + errorResponse);
                     }
-                }
+                
             }
             catch (Exception ex)
             {

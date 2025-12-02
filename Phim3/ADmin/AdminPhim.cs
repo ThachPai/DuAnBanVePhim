@@ -11,11 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Forms.DataVisualization.Charting; // Thư viện biểu đồ
 namespace Phim3
 {
     public partial class AdminPhim : Form
     {
+
         public AdminPhim()
         {
             InitializeComponent();
@@ -25,8 +26,8 @@ namespace Phim3
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                HttpClient client = new HttpClient();
+                
                     // Gọi API lấy danh sách
                     string apiUrl = "https://localhost:7071/api/auth/users"; // SỬA PORT
                     var response = await client.GetStringAsync(apiUrl);
@@ -36,7 +37,7 @@ namespace Phim3
 
                     // Đổ dữ liệu vào bảng (DataGridView)
                     dgvTaiKhoan.DataSource = userList;
-                }
+                
             }
             catch (Exception ex)
             {
@@ -136,8 +137,8 @@ namespace Phim3
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                HttpClient client = new HttpClient();
+                
                     // Gọi API lấy báo cáo
                     // SỬA PORT API CHO ĐÚNG MÁY BẠN
                     string apiUrl = "https://localhost:7071/api/stats/dashboard";
@@ -152,7 +153,7 @@ namespace Phim3
                     lblVeDaban.Text = stats.Tickets.ToString() + " Vé";
                     lblSoLuongPhim.Text = stats.Movies.ToString() + " Phim";
                     lblSokhachHang.Text = stats.Customers.ToString() + " Người";
-                }
+                
             }
             catch (Exception ex)
             {
@@ -186,8 +187,8 @@ namespace Phim3
                 if (dialogResult == DialogResult.Yes)
                 {
                     // Gọi API xóa
-                    using (HttpClient client = new HttpClient())
-                    {
+                    HttpClient client = new HttpClient();
+                    
                         string apiUrl = "https://localhost:7071/api/auth/users/" + userId;
                         var response = await client.DeleteAsync(apiUrl);
 
@@ -201,7 +202,7 @@ namespace Phim3
                         {
                             MessageBox.Show("Lỗi khi xóa!");
                         }
-                    }
+                    
                 }
             }
             else
@@ -235,8 +236,8 @@ namespace Phim3
             // 3. Gọi API thêm mới
             try
             {
-                using (HttpClient client = new HttpClient()) // Hoặc dùng ApiClient.GetClient() nếu đã làm bài trước
-                {
+                HttpClient client = new HttpClient(); // Hoặc dùng ApiClient.GetClient() nếu đã làm bài trước
+                
                     string json = JsonConvert.SerializeObject(newUser);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -268,7 +269,7 @@ namespace Phim3
                         string error = await response.Content.ReadAsStringAsync();
                         MessageBox.Show("Lỗi: " + error);
                     }
-                }
+                
             }
             catch (Exception ex) { MessageBox.Show("Lỗi kết nối: " + ex.Message); }
         }

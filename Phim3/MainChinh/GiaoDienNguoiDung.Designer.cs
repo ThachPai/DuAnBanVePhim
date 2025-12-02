@@ -112,7 +112,7 @@
             // pictureBox8
             // 
             pictureBox8.Image = Properties.Resources.movie;
-            pictureBox8.Location = new Point(833, 51);
+            pictureBox8.Location = new Point(782, 51);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(140, 65);
             pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
@@ -122,7 +122,7 @@
             // pictureBox7
             // 
             pictureBox7.Image = Properties.Resources.anime;
-            pictureBox7.Location = new Point(697, 51);
+            pictureBox7.Location = new Point(637, 51);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(150, 75);
             pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
@@ -133,7 +133,7 @@
             // 
             pictureBox6.BackColor = Color.Transparent;
             pictureBox6.Image = Properties.Resources.cat;
-            pictureBox6.Location = new Point(552, 77);
+            pictureBox6.Location = new Point(490, 78);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(150, 75);
             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
