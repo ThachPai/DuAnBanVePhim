@@ -9,17 +9,33 @@ namespace Phim3
 {
     public static class ApiClient
     {
-        // 👇 TẤT CẢ ĐỊA CHỈ API SẼ ĐỌC TỪ ĐÂY 👇
-        // (Sửa cổng của bạn vào đây nếu nó khác 7071)
+        // Biến này sẽ được cập nhật động từ file text
         public static string BaseUrl = "https://localhost:7071";
 
-        // Tạo một cái HttpClient DÙNG CHUNG cho toàn bộ app
-        // (Cách này giúp app chạy nhanh và ổn định hơn)
-        private static readonly HttpClient _httpClient = new HttpClient();
+        // Hàm khởi tạo tĩnh: Tự chạy ngay khi App bật lên
+        static ApiClient()
+        {
+            try
+            {
+                // Tìm file ip.txt nằm ngay cạnh file .exe
+                string path = Path.Combine(Application.StartupPath, "ip.txt");
+
+                if (File.Exists(path))
+                {
+                    // Đọc nội dung file (Ví dụ: http://192.168.1.10:7071)
+                    string ipFromFile = File.ReadAllText(path).Trim();
+                    if (!string.IsNullOrEmpty(ipFromFile))
+                    {
+                        BaseUrl = ipFromFile;
+                    }
+                }
+            }
+            catch { /* Nếu lỗi đọc file thì cứ dùng mặc định localhost */ }
+        }
 
         public static HttpClient GetClient()
         {
-            return _httpClient;
+            return new HttpClient();
         }
     }
 }
