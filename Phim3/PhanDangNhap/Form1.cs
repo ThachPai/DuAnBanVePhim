@@ -53,6 +53,16 @@ namespace Phim3
                     // 4. Cất "vé thông hành" (Token) vào "ví" toàn cục
                     GlobalToken.Token = loginResponse?.token;
 
+                    if (loginResponse != null)
+                    {
+                        // Lưu ID và Username vào biến toàn cục để dùng ở các Form khác
+                        SessionData.CurrentUserId = loginResponse.userId;
+                        SessionData.CurrentUsername = loginResponse.username;
+
+                        // [Debug] Kiểm tra xem có lấy được ID không (xóa sau khi chạy ok)
+                        // MessageBox.Show($"Đã lưu Session: ID={SessionData.CurrentUserId}, Name={SessionData.CurrentUsername}");
+                    }
+
                     // 5. Mở Form Trang Chủ (KHÔNG TRUYỀN GÌ CẢ)
                     GiaoDienNguoiDung trangChu = new GiaoDienNguoiDung();
                     trangChu.Show();

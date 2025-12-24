@@ -1,10 +1,13 @@
-﻿namespace Phim3API.Models
+﻿
+using System.Collections.Generic;
+
+namespace Phim3API.Models
 {
     public class BookingRequest
     {
-        public string Username { get; set; }
-        public string MovieTitle { get; set; }
-        public int Quantity { get; set; }
-        public decimal TotalPrice { get; set; }
+        public int ShowtimeId { get; set; } // Phải khớp với tên trong WinForms
+        public List<string> SelectedSeats { get; set; }
+        public int UserId { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }

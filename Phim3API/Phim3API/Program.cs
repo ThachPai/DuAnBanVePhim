@@ -1,23 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
-//* Thêm mới *\\
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Phim3API.Hubs ; // Thêm dòng này để tìm thấy SeatHub
+using System.Text.Json.Serialization;
 
-
+// 1. KHỞI TẠO BUILDER (Phải làm đầu tiên)
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 2. ĐĂNG KÝ DỊCH VỤ (Add Services)
+// ----------------------------------
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Thêm SignalR (Để làm ghế Real-time)
+builder.Services.AddSignalR();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+{
+    // Dòng này cực kỳ quan trọng để sửa lỗi Swagger 500 khi có quan hệ bảng
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+}); ;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// Đăng ký kết nối SQL
+
+// Đăng ký kết nối SQL Server
 builder.Services.AddDbContext<Phim3API.Data.AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// === THÊM KHỐI NÀY VÀO === 
+// Đăng ký xác thực JWT (Bảo mật)
 builder.Services.AddAuthentication().AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -30,9 +39,13 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 });
 
+// 3. XÂY DỰNG APP
+// ----------------------------------
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 4. CẤU HÌNH PIPELINE (Use & Map)
+// ----------------------------------
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -41,15 +54,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-
-// Thêm mới
+// Quan trọng: Authentication phải ĐỨNG TRƯỚC Authorization
 app.UseAuthentication();
 app.UseAuthorization();
-// ...
+
+// Định tuyến (Map)
 app.MapControllers();
+app.MapHub<SeatHub>("/seatHub"); // Đường dẫn cho SignalR
+
+// 5. CHẠY APP (Dòng cuối cùng)
 app.Run();

@@ -20,11 +20,7 @@ namespace Phim3API.Models
             // Tạo bản ghi mới
             var newBooking = new Booking // Class này ánh xạ với bảng SQL của Thịnh
             {
-                Username = request.Username,
-                MovieTitle = request.MovieTitle,
-                Quantity = request.Quantity,
-                TotalPrice = request.TotalPrice,
-                BookingDate = DateTime.Now
+
             };
 
             _context.Bookings.Add(newBooking);

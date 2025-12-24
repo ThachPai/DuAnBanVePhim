@@ -18,7 +18,7 @@ namespace Phim3API.Models
         {
             // 1. Tính tổng doanh thu (Cộng cột TotalPrice trong bảng Bookings)
             // Dùng hàm Sum(). Nếu chưa có đơn nào thì trả về 0
-            var doanhThu = _context.Bookings.Sum(b => (decimal?)b.TotalPrice) ?? 0;
+            var doanhThu = _context.Bookings.Sum(b => (decimal?)b.TotalAmount) ?? 0;
 
             // 2. Tính tổng vé bán ra (Cộng cột Quantity)
             var soVe = _context.Bookings.Sum(b => (int?)b.Quantity) ?? 0;

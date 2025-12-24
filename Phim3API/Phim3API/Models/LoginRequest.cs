@@ -2,9 +2,8 @@
 {
     public class LoginRequest
     {
-        
-            public string Username { get; set; }
-            public string Password { get; set; }
-        
+        // Sửa 'Username' thành 'EmailOrUsername' để khớp với AuthController
+        public string? EmailOrUsername { get; set; }
+        public string? Password { get; set; }
     }
 }

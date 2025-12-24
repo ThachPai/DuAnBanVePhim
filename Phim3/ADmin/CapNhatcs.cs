@@ -59,7 +59,7 @@ namespace Phim3.PhanDangNhap
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                     // SỬA PORT + ID PHIM
-                    string apiUrl = "https://localhost:7071/api/movie/" + _movieId;
+                    string apiUrl = "https://localhost:7500/api/movie/" + _movieId;
 
                     var response = await client.PutAsync(apiUrl, content); // Dùng PutAsync
 

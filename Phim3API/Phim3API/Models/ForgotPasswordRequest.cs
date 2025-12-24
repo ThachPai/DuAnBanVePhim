@@ -3,8 +3,10 @@
     public class ForgotPasswordRequest
     {
         // Hộp chứa thông tin Quên mật khẩu
-        
-            public string Email { get; set; }
-        
+
+        public string? Email { get; set; }
+        public string? OTPCode { get; set; } 
+        public string? NewPassword { get; set; }
+
     }
 }

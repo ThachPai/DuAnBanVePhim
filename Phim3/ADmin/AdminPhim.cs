@@ -19,6 +19,15 @@ namespace Phim3
         public AdminPhim()
         {
             InitializeComponent();
+            Phim3.UC_ThemPhim manHinhThemPhim = new Phim3.UC_ThemPhim();
+
+            // 2. Cho nó lấp đầy cái Tab
+            manHinhThemPhim.Dock = DockStyle.Fill;
+
+            // 3. Nhét nó vào cái Tab "Thêm phim mới"
+            // LƯU Ý: Thay chữ 'tabPage1' bên dưới bằng TÊN THẬT bạn vừa xem ở Bước 1
+            // Ví dụ: tabThemPhim.Controls.Add(...)
+            tabPage3.Controls.Add(manHinhThemPhim);
         }
         private async System.Threading.Tasks.Task LoadUsers()
         {
@@ -27,7 +36,7 @@ namespace Phim3
                 using (HttpClient client = new HttpClient())
                 {
                     // Gọi API lấy danh sách
-                    string apiUrl = "https://localhost:7071/api/auth/users"; // SỬA PORT
+                    string apiUrl = "https://localhost:7500/api/auth/users"; // SỬA PORT
                     var response = await client.GetStringAsync(apiUrl);
 
                     // Chuyển đổi JSON sang danh sách
@@ -139,7 +148,7 @@ namespace Phim3
                 {
                     // Gọi API lấy báo cáo
                     // SỬA PORT API CHO ĐÚNG MÁY BẠN
-                    string apiUrl = "https://localhost:7071/api/stats/dashboard";
+                    string apiUrl = "https://localhost:7500/api/stats/dashboard";
 
                     var response = await client.GetStringAsync(apiUrl);
 
@@ -187,7 +196,7 @@ namespace Phim3
                     // Gọi API xóa
                     using (HttpClient client = new HttpClient())
                     {
-                        string apiUrl = "https://localhost:7071/api/auth/users/" + userId;
+                        string apiUrl = "https://localhost:7500/api/auth/users/" + userId;
                         var response = await client.DeleteAsync(apiUrl);
 
                         if (response.IsSuccessStatusCode)
@@ -207,6 +216,11 @@ namespace Phim3
             {
                 MessageBox.Show("Vui lòng chọn một dòng để xóa!");
             }
+        }
+
+        private void uC_ThemPhim1_Load(object sender, EventArgs e)
+        {
+
         }
     }
     public class DashboardStats

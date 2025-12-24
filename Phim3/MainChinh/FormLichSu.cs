@@ -41,7 +41,7 @@ namespace Phim3.MainChinh
                 using (HttpClient client = new HttpClient())
                 {
                     // Gọi API lấy lịch sử
-                    string apiUrl = "https://localhost:7071/api/booking/history?username=" + _username;
+                    string apiUrl = "https://localhost:7500/api/booking/history?username=" + _username;
 
                     var response = await client.GetStringAsync(apiUrl);
 

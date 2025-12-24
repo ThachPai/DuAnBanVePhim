@@ -1,165 +1,152 @@
 ﻿using Newtonsoft.Json;
+using Phim3.NutDatVe;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http; 
 using System.Windows.Forms;
 
 namespace Phim3
 {
     public partial class Nut1 : Form
     {
-        // Biến để lưu thông tin phim được truyền sang
-        private string _tenPhim;
-        private decimal _giaVe;
-        private string _username; // Người đang đăng nhập
+        // 1. Biến toàn cục để lưu dữ liệu phim hiện tại
+        private int _movieId;       
+        private string _tenPhim;   
+        private decimal _giaVe;    
 
-        public Nut1(string tenPhim, decimal giaVe, string username)
+        // 2. Constructor: Phải nhận ĐỦ 3 tham số khớp với UC_MovieItem
+        public Nut1(int idPhim, string tenPhim, decimal giaVe, string posterUrl, int duration, DateTime ngayChieu)
         {
             InitializeComponent();
-            // Lưu lại vào biến
-            _tenPhim = tenPhim;
-            _giaVe = giaVe;
-            _username = username;
-            // 👇 THÊM DÒNG NÀY: Tự động điền ngày hôm nay
+            MessageBox.Show("Link nhận được: " + posterUrl);
+
+            // Hứng dữ liệu từ bên ngoài truyền vào
+            this._movieId = idPhim;
+            this._tenPhim = tenPhim;
+            this._giaVe = giaVe;
+            lblThoiLuong.Text = duration + " phút";
+            lblTenPhim.Text = tenPhim;
+            lblGiaVe.Text = giaVe.ToString("N0") + " VNĐ";
+
+            // Hiển thị ngày giờ hiện tại
             txtNgayChieu.Text = DateTime.Now.ToString("dd/MM/yyyy");
-
-            // Khóa ô này lại không cho sửa (chỉ để xem)
             txtNgayChieu.ReadOnly = true;
-            // 👇 GỌI HÀM TẢI GHẾ NGAY KHI MỞ FORM
+            try
+            {
+                if (!string.IsNullOrEmpty(posterUrl))
+                {
+                    pictureBox4.Load(posterUrl); // picPoster là tên cái khung ảnh góc phải
+                }
+            }
+            catch { } 
+
+                    // Hiển thị tên phim lên Form (nếu bạn có label tiêu đề)
+                    this.Text = "Đặt vé: " + _tenPhim;
+
+            // Gọi API kiểm tra ghế ngay lập tức
             LoadGheConLai();
-
-
         }
-        // Hàm gọi API kiểm tra ghế
+
+        // Hàm gọi API lấy số ghế còn lại từ Server
         private async void LoadGheConLai()
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    // Gọi API (Lưu ý: movieTitle phải được mã hóa nếu có dấu cách)
-                    string apiUrl = "https://localhost:7071/api/booking/check-seats?movieTitle=" + Uri.EscapeDataString(_tenPhim);
+                    // URL API: Đảm bảo PORT 7071 hoặc 7123 là đúng máy bạn
+                    // Gửi kèm Tên Phim để Server đếm ghế
+                    string apiUrl = "https://localhost:7500/api/booking/check-seats?movieTitle=" + Uri.EscapeDataString(_tenPhim);
 
                     var response = await client.GetStringAsync(apiUrl);
-                    // 👇 THÊM DÒNG NÀY: Để xem API trả về cái gì
-                    //MessageBox.Show("Kết quả từ API: " + response);
 
-                    // Đọc kết quả JSON (ví dụ: { "remaining": 48 })
+                    // Convert JSON về Object
                     dynamic result = JsonConvert.DeserializeObject(response);
+
+                    // Giả sử API trả về: { "remaining": 50 }
                     int conLai = result.remaining;
 
-                    // Hiển thị lên Label
-                    lblGheConLai.Text = $"Còn {conLai} ghế";
+                    // Hiển thị
+                    lblGheConLai.Text = $"Còn {conLai} ghế trống";
 
-                    // Logic phụ: Nếu hết ghế (<= 0) thì khóa nút Xác nhận lại
+                    // Logic: Hết ghế thì khóa nút
                     if (conLai <= 0)
                     {
                         lblGheConLai.Text = "HẾT VÉ";
                         lblGheConLai.ForeColor = System.Drawing.Color.Red;
-                        btnXacNhan.Enabled = false; // Khóa nút
+                        btnXacNhan.Enabled = false;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải ghế: " + ex.Message);
+                // Nếu lỗi mạng thì tạm thời hiện "Đang cập nhật" chứ đừng crash
+                lblGheConLai.Text = "Đang cập nhật...";
+                // MessageBox.Show("Lỗi tải ghế: " + ex.Message); // Bật lên nếu muốn debug
             }
-
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+        // Khi người dùng nhập số lượng -> Tự động tính tiền theo giá DB
         private void txtSoLuong_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(txtSoLuong.Text, out int soLuong)) // txtSoLuong là tên ô nhập
+            if (int.TryParse(txtSoLuong.Text, out int soLuong))
             {
+                // KHÔNG DÙNG 75000 NỮA -> Dùng _giaVe thật
                 decimal tongTien = soLuong * _giaVe;
-                lblTongTien.Text = tongTien.ToString("N0") + " VNĐ"; // lblTongTien là nhãn hiển thị tiền
+
+                lblGiaVe.Text = tongTien.ToString("N0") + " VNĐ";
+            }
+            else
+            {
+                lblGiaVe.Text = "0 VNĐ";
             }
         }
 
+        // Nút xác nhận chuyển sang chọn ghế
         private async void btnXacNhan_Click(object sender, EventArgs e)
         {
-            // 1. Lấy số ghế khách muốn mua
-            if (!int.TryParse(txtSoLuong.Text, out int soLuong) || soLuong <= 0)
-            {
-                MessageBox.Show("Số lượng không hợp lệ!");
-                return;
-            }
+            if (!int.TryParse(txtSoLuong.Text, out int soLuong) || soLuong <= 0) return;
 
-            // 2. Lấy số ghế còn lại từ cái Label mình vừa hiển thị
-            // (Mẹo: Cắt chuỗi "Còn 48 ghế" để lấy số 48, hoặc lưu biến toàn cục)
-            // Cách đơn giản: Gọi lại API hoặc lưu biến. Ở đây mình làm cách lưu biến cho dễ nhé.
-            // ... Thôi làm cách đơn giản nhất là check text đi:
-
-            string textGhe = lblGheConLai.Text.Replace("Còn ", "").Replace(" ghế", "");
-            int gheHienCo = 0;
-            int.TryParse(textGhe, out gheHienCo);
-
-            // 3. So sánh
-            if (soLuong > gheHienCo)
-            {
-                MessageBox.Show($"Xin lỗi, chỉ còn lại {gheHienCo} ghế thôi!");
-                return; // Dừng lại, không cho mua
-            }
-
-            decimal tongTien = soLuong * _giaVe;
-
-            // Đóng gói dữ liệu
-            var bookingData = new
-            {
-                Username = _username,
-                MovieTitle = _tenPhim,
-                Quantity = soLuong,
-                TotalPrice = tongTien
-            };
-
-            // Gọi API (Copy y chang mấy bài trước)
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string json = JsonConvert.SerializeObject(bookingData);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    // Gọi API lấy suất chiếu theo MovieId
+                    string url = $"https://localhost:7500/api/booking/get-by-movie/{_movieId}";
+                    var response = await client.GetStringAsync(url);
+                    var showtimes = JsonConvert.DeserializeObject<List<dynamic>>(response);
 
-                    // SỬA PORT API
-                    var response = await client.PostAsync("https://localhost:7071/api/booking", content);
-
-                    if (response.IsSuccessStatusCode)
+                    if (showtimes != null && showtimes.Count > 0)
                     {
-                        MessageBox.Show("Đặt vé thành công!");
-                        this.Close(); // Đóng form đặt vé
+                        int realShowtimeId = showtimes[0].id; // Lấy ID suất chiếu thực (ID = 1, 2, 3...)
+
+                        int userId = SessionData.CurrentUserId ?? 1;
+                        decimal tongTien = soLuong * _giaVe;
+
+                        this.Hide();
+                        ChonGhe formGhe = new ChonGhe(realShowtimeId, soLuong, userId, tongTien);
+                        formGhe.ShowDialog();
+                        this.Show();
                     }
                     else
                     {
-                        MessageBox.Show("Lỗi đặt vé!");
+                        MessageBox.Show("Phim này chưa có suất chiếu. Hãy thử thêm lại phim mới để hệ thống tự tạo suất chiếu!");
                     }
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+            }
         }
 
-        private void lblTongTien_Click(object sender, EventArgs e)
-        {
+        // Các sự kiện thừa (do lỡ click nhầm), cứ để trống cũng được
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) { }
+        private void label6_Click(object sender, EventArgs e) { }
+        private void lblTongTien_Click(object sender, EventArgs e) { }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

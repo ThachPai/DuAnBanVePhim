@@ -72,6 +72,7 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            tabPage3 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel5.SuspendLayout();
@@ -106,12 +107,14 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage3);
             tabControl1.Dock = DockStyle.Bottom;
             tabControl1.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tabControl1.Location = new Point(0, 156);
+            tabControl1.Location = new Point(0, 125);
+            tabControl1.Margin = new Padding(2, 2, 2, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1526, 776);
+            tabControl1.Size = new Size(1221, 621);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -120,10 +123,11 @@
             tabPage1.Controls.Add(panel4);
             tabPage1.Controls.Add(panel3);
             tabPage1.Controls.Add(panel2);
-            tabPage1.Location = new Point(4, 39);
+            tabPage1.Location = new Point(4, 34);
+            tabPage1.Margin = new Padding(2, 2, 2, 2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1518, 733);
+            tabPage1.Padding = new Padding(2, 2, 2, 2);
+            tabPage1.Size = new Size(1213, 583);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Thống kê";
             tabPage1.UseVisualStyleBackColor = true;
@@ -134,17 +138,19 @@
             panel5.Controls.Add(lblSokhachHang);
             panel5.Controls.Add(pictureBox4);
             panel5.Controls.Add(label6);
-            panel5.Location = new Point(474, 179);
+            panel5.Location = new Point(379, 143);
+            panel5.Margin = new Padding(2, 2, 2, 2);
             panel5.Name = "panel5";
-            panel5.Size = new Size(415, 145);
+            panel5.Size = new Size(332, 116);
             panel5.TabIndex = 3;
             // 
             // lblSokhachHang
             // 
             lblSokhachHang.AutoSize = true;
-            lblSokhachHang.Location = new Point(109, 84);
+            lblSokhachHang.Location = new Point(87, 67);
+            lblSokhachHang.Margin = new Padding(2, 0, 2, 0);
             lblSokhachHang.Name = "lblSokhachHang";
-            lblSokhachHang.Size = new Size(159, 30);
+            lblSokhachHang.Size = new Size(137, 25);
             lblSokhachHang.TabIndex = 2;
             lblSokhachHang.Text = "Số khách hàng";
             lblSokhachHang.Click += lblSokhachHang_Click;
@@ -152,9 +158,10 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.people;
-            pictureBox4.Location = new Point(288, 29);
+            pictureBox4.Location = new Point(230, 23);
+            pictureBox4.Margin = new Padding(2, 2, 2, 2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(49, 30);
+            pictureBox4.Size = new Size(39, 24);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 1;
             pictureBox4.TabStop = false;
@@ -162,9 +169,10 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(109, 29);
+            label6.Location = new Point(87, 23);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(173, 30);
+            label6.Size = new Size(152, 25);
             label6.TabIndex = 0;
             label6.Text = "Khách hàng mới";
             // 
@@ -174,26 +182,29 @@
             panel4.Controls.Add(lblSoLuongPhim);
             panel4.Controls.Add(pictureBox5);
             panel4.Controls.Add(label5);
-            panel4.Location = new Point(8, 179);
+            panel4.Location = new Point(6, 143);
+            panel4.Margin = new Padding(2, 2, 2, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(415, 145);
+            panel4.Size = new Size(332, 116);
             panel4.TabIndex = 2;
             // 
             // lblSoLuongPhim
             // 
             lblSoLuongPhim.AutoSize = true;
-            lblSoLuongPhim.Location = new Point(100, 84);
+            lblSoLuongPhim.Location = new Point(80, 67);
+            lblSoLuongPhim.Margin = new Padding(2, 0, 2, 0);
             lblSoLuongPhim.Name = "lblSoLuongPhim";
-            lblSoLuongPhim.Size = new Size(101, 30);
+            lblSoLuongPhim.Size = new Size(87, 25);
             lblSoLuongPhim.TabIndex = 2;
             lblSoLuongPhim.Text = "Số phim ";
             // 
             // pictureBox5
             // 
             pictureBox5.Image = Properties.Resources.movie1;
-            pictureBox5.Location = new Point(274, 10);
+            pictureBox5.Location = new Point(219, 8);
+            pictureBox5.Margin = new Padding(2, 2, 2, 2);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(57, 30);
+            pictureBox5.Size = new Size(46, 24);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 1;
             pictureBox5.TabStop = false;
@@ -201,9 +212,10 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(100, 10);
+            label5.Location = new Point(80, 8);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(180, 30);
+            label5.Size = new Size(156, 25);
             label5.TabIndex = 0;
             label5.Text = "Phim đang chiếu";
             // 
@@ -213,17 +225,19 @@
             panel3.Controls.Add(lblVeDaban);
             panel3.Controls.Add(pictureBox3);
             panel3.Controls.Add(label4);
-            panel3.Location = new Point(474, 17);
+            panel3.Location = new Point(379, 14);
+            panel3.Margin = new Padding(2, 2, 2, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(415, 127);
+            panel3.Size = new Size(332, 102);
             panel3.TabIndex = 1;
             // 
             // lblVeDaban
             // 
             lblVeDaban.AutoSize = true;
-            lblVeDaban.Location = new Point(109, 74);
+            lblVeDaban.Location = new Point(87, 59);
+            lblVeDaban.Margin = new Padding(2, 0, 2, 0);
             lblVeDaban.Name = "lblVeDaban";
-            lblVeDaban.Size = new Size(67, 30);
+            lblVeDaban.Size = new Size(58, 25);
             lblVeDaban.TabIndex = 2;
             lblVeDaban.Text = "Số vé";
             lblVeDaban.Click += lblVeDaban_Click;
@@ -231,9 +245,10 @@
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.ticket;
-            pictureBox3.Location = new Point(226, 21);
+            pictureBox3.Location = new Point(181, 17);
+            pictureBox3.Margin = new Padding(2, 2, 2, 2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(68, 30);
+            pictureBox3.Size = new Size(54, 24);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 1;
             pictureBox3.TabStop = false;
@@ -241,9 +256,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(109, 21);
+            label4.Location = new Point(87, 17);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(111, 30);
+            label4.Size = new Size(97, 25);
             label4.TabIndex = 0;
             label4.Text = "Vé đã bán";
             // 
@@ -253,26 +269,29 @@
             panel2.Controls.Add(lblDoanhThu);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(8, 17);
+            panel2.Location = new Point(6, 14);
+            panel2.Margin = new Padding(2, 2, 2, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(415, 127);
+            panel2.Size = new Size(332, 102);
             panel2.TabIndex = 0;
             // 
             // lblDoanhThu
             // 
             lblDoanhThu.AutoSize = true;
-            lblDoanhThu.Location = new Point(99, 74);
+            lblDoanhThu.Location = new Point(79, 59);
+            lblDoanhThu.Margin = new Padding(2, 0, 2, 0);
             lblDoanhThu.Name = "lblDoanhThu";
-            lblDoanhThu.Size = new Size(89, 30);
+            lblDoanhThu.Size = new Size(76, 25);
             lblDoanhThu.TabIndex = 2;
             lblDoanhThu.Text = "Số tiền ";
             // 
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.dollar_symbol;
-            pictureBox2.Location = new Point(289, 21);
+            pictureBox2.Location = new Point(231, 17);
+            pictureBox2.Margin = new Padding(2, 2, 2, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(42, 31);
+            pictureBox2.Size = new Size(34, 25);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -280,9 +299,10 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(100, 22);
+            label3.Location = new Point(80, 18);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(183, 30);
+            label3.Size = new Size(158, 25);
             label3.TabIndex = 0;
             label3.Text = "Doanh thu tháng";
             // 
@@ -292,10 +312,11 @@
             tabPage2.Controls.Add(panel8);
             tabPage2.Controls.Add(panel7);
             tabPage2.Controls.Add(panel6);
-            tabPage2.Location = new Point(4, 39);
+            tabPage2.Location = new Point(4, 34);
+            tabPage2.Margin = new Padding(2, 2, 2, 2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1518, 733);
+            tabPage2.Padding = new Padding(2, 2, 2, 2);
+            tabPage2.Size = new Size(1213, 583);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Quản lý phim";
             tabPage2.UseVisualStyleBackColor = true;
@@ -305,16 +326,18 @@
             panel9.Controls.Add(button5);
             panel9.Controls.Add(pictureBox13);
             panel9.Controls.Add(pictureBox9);
-            panel9.Location = new Point(1153, 34);
+            panel9.Location = new Point(922, 27);
+            panel9.Margin = new Padding(2, 2, 2, 2);
             panel9.Name = "panel9";
-            panel9.Size = new Size(300, 527);
+            panel9.Size = new Size(240, 422);
             panel9.TabIndex = 3;
             // 
             // button5
             // 
-            button5.Location = new Point(76, 468);
+            button5.Location = new Point(61, 374);
+            button5.Margin = new Padding(2, 2, 2, 2);
             button5.Name = "button5";
-            button5.Size = new Size(183, 47);
+            button5.Size = new Size(146, 38);
             button5.TabIndex = 5;
             button5.Text = "Cập nhật";
             button5.UseVisualStyleBackColor = true;
@@ -323,9 +346,10 @@
             // pictureBox13
             // 
             pictureBox13.Image = Properties.Resources._1159633;
-            pictureBox13.Location = new Point(25, 468);
+            pictureBox13.Location = new Point(20, 374);
+            pictureBox13.Margin = new Padding(2, 2, 2, 2);
             pictureBox13.Name = "pictureBox13";
-            pictureBox13.Size = new Size(45, 47);
+            pictureBox13.Size = new Size(36, 38);
             pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox13.TabIndex = 4;
             pictureBox13.TabStop = false;
@@ -333,9 +357,10 @@
             // pictureBox9
             // 
             pictureBox9.Image = (Image)resources.GetObject("pictureBox9.Image");
-            pictureBox9.Location = new Point(3, 0);
+            pictureBox9.Location = new Point(2, 0);
+            pictureBox9.Margin = new Padding(2, 2, 2, 2);
             pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(297, 388);
+            pictureBox9.Size = new Size(238, 310);
             pictureBox9.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox9.TabIndex = 1;
             pictureBox9.TabStop = false;
@@ -345,16 +370,18 @@
             panel8.Controls.Add(button4);
             panel8.Controls.Add(pictureBox12);
             panel8.Controls.Add(pictureBox8);
-            panel8.Location = new Point(779, 34);
+            panel8.Location = new Point(623, 27);
+            panel8.Margin = new Padding(2, 2, 2, 2);
             panel8.Name = "panel8";
-            panel8.Size = new Size(300, 527);
+            panel8.Size = new Size(240, 422);
             panel8.TabIndex = 2;
             // 
             // button4
             // 
-            button4.Location = new Point(80, 468);
+            button4.Location = new Point(64, 374);
+            button4.Margin = new Padding(2, 2, 2, 2);
             button4.Name = "button4";
-            button4.Size = new Size(183, 47);
+            button4.Size = new Size(146, 38);
             button4.TabIndex = 4;
             button4.Text = "Cập nhật";
             button4.UseVisualStyleBackColor = true;
@@ -363,9 +390,10 @@
             // pictureBox12
             // 
             pictureBox12.Image = Properties.Resources._1159633;
-            pictureBox12.Location = new Point(29, 468);
+            pictureBox12.Location = new Point(23, 374);
+            pictureBox12.Margin = new Padding(2, 2, 2, 2);
             pictureBox12.Name = "pictureBox12";
-            pictureBox12.Size = new Size(45, 47);
+            pictureBox12.Size = new Size(36, 38);
             pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox12.TabIndex = 3;
             pictureBox12.TabStop = false;
@@ -373,9 +401,10 @@
             // pictureBox8
             // 
             pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
-            pictureBox8.Location = new Point(3, 3);
+            pictureBox8.Location = new Point(2, 2);
+            pictureBox8.Margin = new Padding(2, 2, 2, 2);
             pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(297, 388);
+            pictureBox8.Size = new Size(238, 310);
             pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox8.TabIndex = 1;
             pictureBox8.TabStop = false;
@@ -385,16 +414,18 @@
             panel7.Controls.Add(button3);
             panel7.Controls.Add(pictureBox11);
             panel7.Controls.Add(pictureBox7);
-            panel7.Location = new Point(397, 34);
+            panel7.Location = new Point(318, 27);
+            panel7.Margin = new Padding(2, 2, 2, 2);
             panel7.Name = "panel7";
-            panel7.Size = new Size(300, 527);
+            panel7.Size = new Size(240, 422);
             panel7.TabIndex = 1;
             // 
             // button3
             // 
-            button3.Location = new Point(79, 468);
+            button3.Location = new Point(63, 374);
+            button3.Margin = new Padding(2, 2, 2, 2);
             button3.Name = "button3";
-            button3.Size = new Size(183, 47);
+            button3.Size = new Size(146, 38);
             button3.TabIndex = 4;
             button3.Text = "Cập nhật";
             button3.UseVisualStyleBackColor = true;
@@ -403,9 +434,10 @@
             // pictureBox11
             // 
             pictureBox11.Image = Properties.Resources._1159633;
-            pictureBox11.Location = new Point(28, 468);
+            pictureBox11.Location = new Point(22, 374);
+            pictureBox11.Margin = new Padding(2, 2, 2, 2);
             pictureBox11.Name = "pictureBox11";
-            pictureBox11.Size = new Size(45, 47);
+            pictureBox11.Size = new Size(36, 38);
             pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox11.TabIndex = 3;
             pictureBox11.TabStop = false;
@@ -413,9 +445,10 @@
             // pictureBox7
             // 
             pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
-            pictureBox7.Location = new Point(3, 3);
+            pictureBox7.Location = new Point(2, 2);
+            pictureBox7.Margin = new Padding(2, 2, 2, 2);
             pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(297, 388);
+            pictureBox7.Size = new Size(238, 310);
             pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox7.TabIndex = 1;
             pictureBox7.TabStop = false;
@@ -425,16 +458,18 @@
             panel6.Controls.Add(button2);
             panel6.Controls.Add(pictureBox10);
             panel6.Controls.Add(pictureBox6);
-            panel6.Location = new Point(36, 34);
+            panel6.Location = new Point(29, 27);
+            panel6.Margin = new Padding(2, 2, 2, 2);
             panel6.Name = "panel6";
-            panel6.Size = new Size(300, 527);
+            panel6.Size = new Size(240, 422);
             panel6.TabIndex = 0;
             // 
             // button2
             // 
-            button2.Location = new Point(72, 468);
+            button2.Location = new Point(58, 374);
+            button2.Margin = new Padding(2, 2, 2, 2);
             button2.Name = "button2";
-            button2.Size = new Size(183, 47);
+            button2.Size = new Size(146, 38);
             button2.TabIndex = 2;
             button2.Text = "Cập nhật";
             button2.UseVisualStyleBackColor = true;
@@ -443,9 +478,10 @@
             // pictureBox10
             // 
             pictureBox10.Image = Properties.Resources._1159633;
-            pictureBox10.Location = new Point(21, 468);
+            pictureBox10.Location = new Point(17, 374);
+            pictureBox10.Margin = new Padding(2, 2, 2, 2);
             pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(45, 47);
+            pictureBox10.Size = new Size(36, 38);
             pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox10.TabIndex = 1;
             pictureBox10.TabStop = false;
@@ -453,9 +489,10 @@
             // pictureBox6
             // 
             pictureBox6.Image = Properties.Resources.ave3;
-            pictureBox6.Location = new Point(0, 3);
+            pictureBox6.Location = new Point(0, 2);
+            pictureBox6.Margin = new Padding(2, 2, 2, 2);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(297, 388);
+            pictureBox6.Size = new Size(238, 310);
             pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox6.TabIndex = 0;
             pictureBox6.TabStop = false;
@@ -465,18 +502,20 @@
             tabPage5.BackColor = Color.Transparent;
             tabPage5.Controls.Add(btnXoaUser);
             tabPage5.Controls.Add(dgvTaiKhoan);
-            tabPage5.Location = new Point(4, 39);
+            tabPage5.Location = new Point(4, 34);
+            tabPage5.Margin = new Padding(2, 2, 2, 2);
             tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(1518, 733);
+            tabPage5.Padding = new Padding(2, 2, 2, 2);
+            tabPage5.Size = new Size(1213, 583);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Tài khoản";
             // 
             // btnXoaUser
             // 
-            btnXoaUser.Location = new Point(768, 393);
+            btnXoaUser.Location = new Point(614, 314);
+            btnXoaUser.Margin = new Padding(2, 2, 2, 2);
             btnXoaUser.Name = "btnXoaUser";
-            btnXoaUser.Size = new Size(174, 34);
+            btnXoaUser.Size = new Size(139, 27);
             btnXoaUser.TabIndex = 1;
             btnXoaUser.Text = "Xóa tài khoản";
             btnXoaUser.UseVisualStyleBackColor = true;
@@ -487,10 +526,11 @@
             dgvTaiKhoan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTaiKhoan.BackgroundColor = Color.White;
             dgvTaiKhoan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTaiKhoan.Location = new Point(0, 6);
+            dgvTaiKhoan.Location = new Point(0, 5);
+            dgvTaiKhoan.Margin = new Padding(2, 2, 2, 2);
             dgvTaiKhoan.Name = "dgvTaiKhoan";
             dgvTaiKhoan.RowHeadersWidth = 62;
-            dgvTaiKhoan.Size = new Size(942, 372);
+            dgvTaiKhoan.Size = new Size(754, 298);
             dgvTaiKhoan.TabIndex = 0;
             // 
             // panel1
@@ -503,17 +543,19 @@
             panel1.Dock = DockStyle.Top;
             panel1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1526, 150);
+            panel1.Size = new Size(1221, 120);
             panel1.TabIndex = 1;
             // 
             // button1
             // 
             button1.BackColor = SystemColors.Control;
             button1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(1298, 12);
+            button1.Location = new Point(1038, 10);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(216, 42);
+            button1.Size = new Size(173, 34);
             button1.TabIndex = 3;
             button1.Text = "Chế độ Khách hàng";
             button1.UseVisualStyleBackColor = false;
@@ -525,9 +567,10 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 11F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(112, 35);
+            label2.Location = new Point(90, 28);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(183, 30);
+            label2.Size = new Size(159, 25);
             label2.TabIndex = 2;
             label2.Text = "Quản trị hệ thống";
             // 
@@ -537,9 +580,10 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(112, 3);
+            label1.Location = new Point(90, 2);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(210, 32);
+            label1.Size = new Size(172, 28);
             label1.TabIndex = 1;
             label1.Text = "PHIMMOI Admin";
             // 
@@ -547,20 +591,31 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.clapperboard1;
-            pictureBox1.Location = new Point(0, 3);
+            pictureBox1.Location = new Point(0, 2);
+            pictureBox1.Margin = new Padding(2, 2, 2, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(106, 75);
+            pictureBox1.Size = new Size(85, 60);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // tabPage3
+            // 
+            tabPage3.Location = new Point(4, 34);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Size = new Size(1213, 583);
+            tabPage3.TabIndex = 5;
+            tabPage3.Text = "Thêm phim mới";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
             // AdminPhim
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1526, 932);
+            ClientSize = new Size(1221, 746);
             Controls.Add(panel1);
             Controls.Add(tabControl1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "AdminPhim";
             Load += AdminPhim_Load;
             tabControl1.ResumeLayout(false);
@@ -643,5 +698,6 @@
         private PictureBox pictureBox11;
         private Button btnXoaUser;
         private DataGridView dgvTaiKhoan;
+        private TabPage tabPage3;
     }
 }

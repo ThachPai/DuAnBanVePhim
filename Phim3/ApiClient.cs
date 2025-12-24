@@ -10,7 +10,7 @@ namespace Phim3
     {
         // CẢNH BÁO: BẠN BẮT BUỘC PHẢI THAY SỐ CỔNG (PORT) 7071
         // BẰNG SỐ CỔNG TRONG launchSettings.json CỦA BACKEND CỦA BẠN
-        private static readonly string BASE_URL = "https://localhost:7071/api/auth";
+        private static readonly string BASE_URL = "https://localhost:7500/api/auth";
 
         private static HttpClient _client;
 
@@ -35,7 +35,7 @@ namespace Phim3
                 "application/json"
             );
 
-            // Gửi request (ví dụ: https://localhost:7071/api/auth/register)
+            // Gửi request (ví dụ: https://localhost:7500/api/auth/register)
             return await _client.PostAsync($"{BASE_URL}/{endpoint}", jsonContent);
         }
     }
