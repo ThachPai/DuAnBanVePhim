@@ -44,3 +44,19 @@ Giao diện sơ đồ ghế trực quan (20 ghế).
 Logic Real-time: Kết nối SignalR Client, tự động đổi màu ghế khi có người khác chọn.
 Logic Nghiệp vụ: Tải trạng thái ghế đã bán từ API khi mở form. Giới hạn số lượng ghế được chọn theo số vé đã mua.
 Kết nối: Đã gắn logic mở form chọn ghế vào quy trình đặt vé.
+
+Database (SQL Server): * Tái cấu trúc bảng với IDENTITY(1,1) cho tất cả các bảng chính.
+
+Khắc phục lỗi nhầm lẫn giữa MovieId và ShowtimeId thông qua API trung gian.
+
+Real-time (SignalR): * Xây dựng cơ chế "Trọng tài Server" để ngăn chặn đặt trùng ghế.
+
+Đồng bộ trạng thái ghế đa màu sắc (Vàng/Cam/Đỏ) giúp phân biệt ghế của mình và người khác.
+
+Email Service (SMTP): * Tích hợp gửi mail xác nhận tự động ngay sau khi lưu Database thành công.
+
+Sử dụng HTML Template để nhúng trực tiếp Poster phim từ URL vào nội dung mail.
+
+WinForms UI: * Xử lý mượt mà việc chuyển đổi giữa các Form (Nut1 -> ChonGhe).
+
+Fix lỗi "bấm 2 lần mới hiện màu" bằng cách lắng nghe tín hiệu phản hồi từ Hub.
